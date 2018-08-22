@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1511879158571.000,
+    "dirty" : true,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "735889520",
+    "id" : "747E1C44",
+    "lastKnownWriteTime" : 1512218721,
+    "last_content_update" : 1512310628822,
+    "path" : "~/Documents/Uni/projects/littleowl/code/ParameterReFit.r",
+    "project_path" : null,
+    "properties" : {
+        "cursorPosition" : "133,55",
+        "scrollLine" : "0"
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

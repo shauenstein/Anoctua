@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1525859087992.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3389227528",
+    "id" : "8DBA9A81",
+    "lastKnownWriteTime" : 1534924365,
+    "last_content_update" : 1534924365860,
+    "path" : "~/Documents/Uni/projects/littleowl/code/calibrationScript.r",
+    "project_path" : null,
+    "properties" : {
+        "cursorPosition" : "408,0",
+        "scrollLine" : "377"
+    },
+    "relative_order" : 7,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

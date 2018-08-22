@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1511967709510.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2421213801",
+    "id" : "5C2137D7",
+    "lastKnownWriteTime" : 1511967864,
+    "last_content_update" : 1511967864962,
+    "path" : "~/Documents/Uni/projects/littleowl/code/figures/studyArea.r",
+    "project_path" : null,
+    "properties" : {
+        "cursorPosition" : "79,0",
+        "scrollLine" : "0"
+    },
+    "relative_order" : 9,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

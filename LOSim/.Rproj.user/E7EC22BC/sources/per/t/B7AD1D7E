@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1511881611569.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3687973275",
+    "id" : "B7AD1D7E",
+    "lastKnownWriteTime" : 1512218680,
+    "last_content_update" : 1512218680780,
+    "path" : "~/Documents/Uni/projects/littleowl/code/ABCgetEstimate.r",
+    "project_path" : null,
+    "properties" : {
+        "cursorPosition" : "76,30",
+        "scrollLine" : "0"
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

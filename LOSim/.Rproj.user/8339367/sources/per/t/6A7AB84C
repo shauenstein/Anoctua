@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1523437180441.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "76744483",
+    "id" : "6A7AB84C",
+    "lastKnownWriteTime" : 1523378828,
+    "last_content_update" : 1523378828,
+    "path" : "~/Documents/Uni/projects/littleowl/code/merge_lc_final.r",
+    "project_path" : null,
+    "properties" : {
+        "cursorPosition" : "26,85",
+        "scrollLine" : "0",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

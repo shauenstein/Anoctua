@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1534865263638.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "189697269",
+    "id" : "7500D256",
+    "lastKnownWriteTime" : 1522252723,
+    "last_content_update" : 1522252723,
+    "path" : "~/Documents/Uni/projects/littleowl/code/ABCsummaryChoice.r",
+    "project_path" : null,
+    "properties" : {
+        "cursorPosition" : "72,52",
+        "scrollLine" : "47"
+    },
+    "relative_order" : 12,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
