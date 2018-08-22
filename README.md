@@ -4,5 +4,5 @@
 Contains all scripts and R and C++ functions to reproduce the analysis.
 
 ## LOSim
-R package as interface to the, in C++ implemente individual-based model.
+R package as interface to the C++ coded individual-based model.
 
