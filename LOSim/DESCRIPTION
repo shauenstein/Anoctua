@@ -1,0 +1,16 @@
+Package: LOSim
+Type: Package
+Title: What the package does (short line)
+Version: 1.0
+Date: 2016-05-10
+Authors: c(person("Severin", "Hauenstein", role = c("aut","cre")),
+    person("Florian", "Hartig", role = "aut"))
+Author: Severin Hauenstein and Florian Hartig
+Maintainer: Severin Hauenstein <severin.hauenstein@saturn.uni-freiburg.de>
+Description: A package for simulating dispersal movement of juvenile little owls (Athene noctua).
+License: GPL (>= 2)
+Imports:
+    Rcpp (>= 0.12.3)
+LinkingTo: Rcpp, BH
+RoxygenNote: 6.0.1
+VignetteBuilder: knitr
