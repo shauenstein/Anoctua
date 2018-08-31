@@ -254,66 +254,144 @@ mME <- unlist(lapply(which(addInfo$Sex == "m"), function(x) posterior[[regrAdj]]
 
 
 
-# plot posterior distributions
-pdf("../figures/posterior.pdf", width = 10, height = 10)
-par(mfrow=c(2,2), mar=c(1.5,.5,.5,0), oma=c(0,0,0,1), cex.lab = 1.5, cex.axis = 1.3, las = 1, mgp = c(1.5,0.4,0), tcl = -0.2, pty = "s")
-plot(density(posterior[[regrAdj]][[1]][,1]), xlim=c(0.1,5), 
-     main = "", xlab = "", ylab = "", 
-     ylim =c(0,2.8), type = "n", yaxt = "n",lwd=0.5)
-for(i in 1:length(posterior[[regrAdj]])) 
-  lines(density(posterior[[regrAdj]][[i]][,1]), col = ifelse(is.na(addInfo$Sex[i]),
-                                                                rgb(0.7,0.7,0.7),
-                                                                ifelse(addInfo$Sex[i] == "f",
-                                                                       rgb(0.55,0,0,0.4),
-                                                                       rgb(0,0,0.55,0.4))),
-        lwd=0.5)
-# pooled
-lines(density(fHP), col = rgb(0.55,0,0), lwd=2) 
-lines(density(mHP), col = rgb(0,0,0.55), lwd=2)
+# plot posterior distributions colour coded by sex
+pNames <- c("habitatPreference", "stepShape", "directionalBias", "roostLambda")
+for(pInt in pNames){
+  ggdf <- data.frame(xval = unlist(lapply(seq_along(posterior[[regrAdj]]), function(x) density(posterior[[regrAdj]][[x]][,pInt], n = 500)$x)),
+                     dens = unlist(lapply(seq_along(posterior[[regrAdj]]), function(x) density(posterior[[regrAdj]][[x]][,pInt], n = 500)$y)),
+                     id = rep(seq_along(posterior[[regrAdj]]), each = 500),
+                     sex = rep(ifelse(is.na(addInfo$Sex),
+                                      rgb(0,0,0,0.4),
+                                      ifelse(addInfo$Sex == "f",
+                                             rgb(0.55,0,0,0.4),
+                                             rgb(0,0,0.55,0.4))), each = 500)
+  )
+  ggdf_f <- data.frame(xval = unlist(lapply(which(addInfo$Sex == "f"), function(x) posterior[[regrAdj]][[x]][,pInt])))
+  ggdf_m <- data.frame(xval = unlist(lapply(which(addInfo$Sex == "m"), function(x) posterior[[regrAdj]][[x]][,pInt])))
+  
+  ggplot() +
+    geom_line(data = ggdf, aes(x=xval,y=dens,group=id,colour=sex)) +
+    scale_colour_identity() +
+    stat_density(data = ggdf_f, aes(xval), colour = rgb(0.55,0,0), size = 1.5, geom = "line") +
+    stat_density(data = ggdf_m, aes(xval), colour = rgb(0,0,0.55), size = 1.5, geom = "line") +
+    xlab("") + 
+    ylab("") +
+    theme(
+      panel.border = element_rect(fill = NA),
+      axis.text.x = element_text(family = "Linux Libertine", size = 60, margin = margin(t = 10, r = 0, b = 0, l = 0)),
+      axis.text.y = element_blank(),
+      axis.ticks.length = unit(.25, "cm"),
+      axis.ticks.y = element_blank(),
+      legend.background = element_blank(),
+      panel.background = element_blank(),
+      panel.grid.major = element_blank(),
+      panel.grid.minor = element_blank()
+    )
+  
+  ggsave(paste0("posterior_",pInt,".pdf"),
+         device = cairo_pdf,
+         path = "../figures/results/posterior_indiv_plots",
+         width = 25, height = 25, units = "cm", dpi = 400)
+}
 
-plot(density(posterior[[regrAdj]][[1]][,2]), xlim=c(0.1,4), 
-     main = "", xlab = "", ylab = "", 
-     ylim =c(0,3.6), type = "n", yaxt = "n",lwd=0.5)
-for(i in 1:length(posterior[[regrAdj]])) 
-  lines(density(posterior[[regrAdj]][[i]][,2]), col = ifelse(is.na(addInfo$Sex[i]),
-                                                                rgb(0,0,0,0.4),
-                                                                ifelse(addInfo$Sex[i] == "f",
-                                                                       rgb(0.55,0,0,0.4),
-                                                                       rgb(0,0,0.55,0.4))),
-        lwd=0.5)
-# pooled
-lines(density(fSS), col = rgb(0.55,0,0), lwd=2) 
-lines(density(mSS), col = rgb(0,0,0.55), lwd=2)
 
-plot(density(posterior[[regrAdj]][[1]][,3]), xlim=c(0.1,3.5), 
-     main = "", xlab = "", ylab = "",
-     ylim =c(0,4.1), type = "n", yaxt = "n",lwd=0.5)
-for(i in 1:length(posterior[[regrAdj]])) 
-  lines(density(posterior[[regrAdj]][[i]][,3]), col = ifelse(is.na(addInfo$Sex[i]),
-                                                                rgb(0,0,0,0.4),
-                                                                ifelse(addInfo$Sex[i] == "f",
-                                                                       rgb(0.55,0,0,0.4),
-                                                                       rgb(0,0,0.55,0.4))),
-        lwd=0.5)
-# pooled
-lines(density(fDB), col = rgb(0.55,0,0), lwd=2) 
-lines(density(mDB), col = rgb(0,0,0.55), lwd=2)
-
-plot(density(posterior[[regrAdj]][[1]][,4]), xlim=c(0.01,30), 
-     main = "", xlab = "", ylab = "",
-     ylim =c(0,0.9), type = "n", yaxt = "n",lwd=0.5)
-for(i in 1:length(posterior[[regrAdj]])) 
-  lines(density(posterior[[regrAdj]][[i]][,4]), col = ifelse(is.na(addInfo$Sex[i]),
-                                                                rgb(0,0,0,0.4),
-                                                                ifelse(addInfo$Sex[i] == "f",
-                                                                       rgb(0.55,0,0,0.4),
-                                                                       rgb(0,0,0.55,0.4))),
-        lwd=0.5)
-# pooled
-lines(density(fME), col = rgb(0.55,0,0), lwd=2) 
-lines(density(mME), col = rgb(0,0,0.55), lwd=2)
-
-dev.off()
+# plot posterior distributions colour coded by fed/not-fed
+for(pInt in pNames){
+  ggdf <- data.frame(xval = unlist(lapply(seq_along(posterior[[regrAdj]]), function(x) density(posterior[[regrAdj]][[x]][,pInt], n = 500)$x)),
+                     dens = unlist(lapply(seq_along(posterior[[regrAdj]]), function(x) density(posterior[[regrAdj]][[x]][,pInt], n = 500)$y)),
+                     id = rep(seq_along(posterior[[regrAdj]]), each = 500),
+                     fed = rep(ifelse(is.na(addInfo$fed),
+                                      rgb(0,0,0,0.4),
+                                      ifelse(addInfo$fed == 0,
+                                             rgb(0.8,0,0,0.4),
+                                             rgb(0,.6,0,0.4))), each = 500)
+  )
+  ggdf_nfed <- data.frame(xval = unlist(lapply(which(addInfo$fed == 0), function(x) posterior[[regrAdj]][[x]][,pInt])))
+  ggdf_fed <- data.frame(xval = unlist(lapply(which(addInfo$fed == 1), function(x) posterior[[regrAdj]][[x]][,pInt])))
+  
+  ggplot() +
+    geom_line(data = ggdf, aes(x=xval,y=dens,group=id,colour=fed)) +
+    scale_colour_identity() +
+    stat_density(data = ggdf_nfed, aes(xval), colour = rgb(0.8,0,0), size = 1.5, geom = "line") +
+    stat_density(data = ggdf_fed, aes(xval), colour = rgb(0,0.6,0), size = 1.5, geom = "line") +
+    xlab("") + 
+    ylab("") +
+    theme(
+      panel.border = element_rect(fill = NA),
+      axis.text.x = element_text(family = "Linux Libertine", size = 60, margin = margin(t = 10, r = 0, b = 0, l = 0)),
+      axis.text.y = element_blank(),
+      axis.ticks.length = unit(.25, "cm"),
+      axis.ticks.y = element_blank(),
+      legend.background = element_blank(),
+      panel.background = element_blank(),
+      panel.grid.major = element_blank(),
+      panel.grid.minor = element_blank()
+    )
+  
+  ggsave(paste0("posterior_",pInt,"_feeding.pdf"),
+         device = cairo_pdf,
+         path = "../figures/results/posterior_indiv_plots",
+         width = 25, height = 25, units = "cm", dpi = 400)
+}
+# pdf("../figures/posterior.pdf", width = 10, height = 10)
+# par(mfrow=c(2,2), mar=c(1.5,.5,.5,0), oma=c(0,0,0,1), cex.lab = 1.5, cex.axis = 1.3, las = 1, mgp = c(1.5,0.4,0), tcl = -0.2, pty = "s")
+# plot(density(posterior[[regrAdj]][[1]][,1]), xlim=c(0.1,5), 
+#      main = "", xlab = "", ylab = "", 
+#      ylim =c(0,2.8), type = "n", yaxt = "n",lwd=0.5)
+# for(i in 1:length(posterior[[regrAdj]])) 
+#   lines(density(posterior[[regrAdj]][[i]][,1]), col = ifelse(is.na(addInfo$Sex[i]),
+#                                                                 rgb(0.7,0.7,0.7),
+#                                                                 ifelse(addInfo$Sex[i] == "f",
+#                                                                        rgb(0.55,0,0,0.4),
+#                                                                        rgb(0,0,0.55,0.4))),
+#         lwd=0.5)
+# # pooled
+# lines(density(fHP), col = rgb(0.55,0,0), lwd=2) 
+# lines(density(mHP), col = rgb(0,0,0.55), lwd=2)
+# 
+# plot(density(posterior[[regrAdj]][[1]][,2]), xlim=c(0.1,4), 
+#      main = "", xlab = "", ylab = "", 
+#      ylim =c(0,3.6), type = "n", yaxt = "n",lwd=0.5)
+# for(i in 1:length(posterior[[regrAdj]])) 
+#   lines(density(posterior[[regrAdj]][[i]][,2]), col = ifelse(is.na(addInfo$Sex[i]),
+#                                                                 rgb(0,0,0,0.4),
+#                                                                 ifelse(addInfo$Sex[i] == "f",
+#                                                                        rgb(0.55,0,0,0.4),
+#                                                                        rgb(0,0,0.55,0.4))),
+#         lwd=0.5)
+# # pooled
+# lines(density(fSS), col = rgb(0.55,0,0), lwd=2) 
+# lines(density(mSS), col = rgb(0,0,0.55), lwd=2)
+# 
+# plot(density(posterior[[regrAdj]][[1]][,3]), xlim=c(0.1,3.5), 
+#      main = "", xlab = "", ylab = "",
+#      ylim =c(0,4.1), type = "n", yaxt = "n",lwd=0.5)
+# for(i in 1:length(posterior[[regrAdj]])) 
+#   lines(density(posterior[[regrAdj]][[i]][,3]), col = ifelse(is.na(addInfo$Sex[i]),
+#                                                                 rgb(0,0,0,0.4),
+#                                                                 ifelse(addInfo$Sex[i] == "f",
+#                                                                        rgb(0.55,0,0,0.4),
+#                                                                        rgb(0,0,0.55,0.4))),
+#         lwd=0.5)
+# # pooled
+# lines(density(fDB), col = rgb(0.55,0,0), lwd=2) 
+# lines(density(mDB), col = rgb(0,0,0.55), lwd=2)
+# 
+# plot(density(posterior[[regrAdj]][[1]][,4]), xlim=c(0.01,30), 
+#      main = "", xlab = "", ylab = "",
+#      ylim =c(0,0.9), type = "n", yaxt = "n",lwd=0.5)
+# for(i in 1:length(posterior[[regrAdj]])) 
+#   lines(density(posterior[[regrAdj]][[i]][,4]), col = ifelse(is.na(addInfo$Sex[i]),
+#                                                                 rgb(0,0,0,0.4),
+#                                                                 ifelse(addInfo$Sex[i] == "f",
+#                                                                        rgb(0.55,0,0,0.4),
+#                                                                        rgb(0,0,0.55,0.4))),
+#         lwd=0.5)
+# # pooled
+# lines(density(fME), col = rgb(0.55,0,0), lwd=2) 
+# lines(density(mME), col = rgb(0,0,0.55), lwd=2)
+# 
+# dev.off()
 
 
 #--------##--------##--------##--------##--------##--------##--------##--------#

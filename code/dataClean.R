@@ -1,12 +1,5 @@
 # checking and cleaning the data
 
-# set working directory
-# setwd("C:/Users/SH/Dropbox/MSc_LittleOwl/Steinkauz_FR")
-# setwd("D:/InteamDocs/Uni/littleowl")
-
-# packages
-
-
 #----------------------------------------------------#
 
 # load raw data
