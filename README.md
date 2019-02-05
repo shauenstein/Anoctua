@@ -1,4 +1,4 @@
-# github repository for Hauenstein et al. (2018): "Linking movement behavior with habitat suitability to predict potential little owl dispersal" 
+# Code repository for Hauenstein, S., J. Fattebert, M. Gr&uuml;ebler, B. Naef-Daenzer, G. Pe'er and F. Hartig. 2019. Calibrating an individual-based movement model to predict functional connectivity for little owls. *Ecological Applications* 
 
 ## Code
 Contains all scripts and R and C++ functions to reproduce the analysis.
